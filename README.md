@@ -1,1 +1,1 @@
-# Arpike-Vue-Admin-Dashboard
+# Arpike Vue Admin Dashboard
