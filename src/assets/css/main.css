@@ -209,11 +209,11 @@ li {
     color: #17B83D;
 }
 
-.sidebar-menu li a .fas.icon-brand {
+.sidebar-menu li a .icon-brand {
     margin-right: 5px;
 }
 
-.sidebar-menu li a .fas.multi-level-menu {
+.sidebar-menu li a .multi-level-menu {
     position: absolute;
     right: 10px;
     line-height: 1.8;
@@ -231,7 +231,7 @@ li {
 
 }
 
-.sidebar-menu li.menu-open a .fas.multi-level-menu {
+.sidebar-menu li.menu-open a .multi-level-menu {
     -webkit-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
@@ -317,13 +317,12 @@ li {
     position: absolute;
     z-index: 2;
     display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
     text-align: center;
     pointer-events: none;
     color: #fff;
     right: 15px;
+    top: 12px;
+    font-size: 20px;
 }
 
 .search-box .form-control {
@@ -853,7 +852,7 @@ button:focus {
     cursor: not-allowed;
 }
 
-.btn .fas {
+.btn .fas, .btn .fa ,.btn .svg-inline--fa{
     margin-right: 4px;
 }
 
@@ -870,7 +869,7 @@ button:focus {
     padding: 6px;
 }
 
-.btn.btn.btn-circle .fas {
+.btn.btn.btn-circle .fas,  .btn.btn.btn-circle .fa  ,.btn.btn-circle .svg-inline--fa {
     margin-right: 0;
 }
 
@@ -998,7 +997,7 @@ button:focus {
 
 }
 
-.footer .footer-wrapper .fas {
+.footer .footer-wrapper .fas, .footer .footer-wrapper .fa,.footer .footer-wrapper .svg-inline--fa{
     color: red;
 }
 
