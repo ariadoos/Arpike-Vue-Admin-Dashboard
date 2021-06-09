@@ -3,7 +3,7 @@
   <nav class="navbar">
     <div class="container-fluid">
       <!-- Toggle SideBar Button -->
-      <button class="bar" id="toggleMenu">
+      <button class="bar" id="toggleMenu" @click.prevent="toggleSideBar()">
         <i class="fas fa-bars"></i>
       </button>
       <!-- End Toggle SideBar Button -->
@@ -45,7 +45,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    toggleSideBar() {
+      document.getElementById('sidebar').classList.toggle('active')
+      document.getElementById('main-content').classList.toggle('active')
+    },
+  },
+}
 </script>
 
 <style></style>

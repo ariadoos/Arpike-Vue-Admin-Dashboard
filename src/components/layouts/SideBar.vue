@@ -11,7 +11,7 @@
           href="javascript:void(0)"
           class="closeBtn"
           id="closeBtn"
-          onclick="closeNav()"
+          @click.prevent="closeNav()"
           >&times;</a
         >
       </div>
@@ -45,6 +45,10 @@ export default {
       } else {
         event.currentTarget.parentNode.classList.toggle('menu-open')
       }
+    },
+    closeNav() {
+      document.getElementById('sidebar').classList.toggle('active')
+      document.getElementById('main-content').classList.toggle('active')
     },
   },
 }
