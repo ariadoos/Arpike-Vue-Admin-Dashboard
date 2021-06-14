@@ -6,13 +6,14 @@
       </div>
 
       <div class="card-body">
-        <form>
+        <form @submit.prevent="login">
           <div class="form-group">
             <input
-              type="text"
+              type="email"
               class="form-control"
-              id="username"
-              placeholder="Username"
+              id="email"
+              placeholder="Emaiil"
+              v-model="email"
             />
           </div>
           <div class="form-group">
@@ -21,6 +22,7 @@
               class="form-control"
               id="password"
               placeholder="Password"
+              v-model="password"
             />
           </div>
 
@@ -34,5 +36,34 @@
 </template>
 
 <script>
-export default {}
+import UserService from '@/services/user/UserService'
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    async login() {
+      let user = {
+        email: this.email,
+        password: this.password,
+      }
+
+      await UserService.csrfTokenRequest().catch((err) => {
+        this.$toaster('error', err.message)
+      })
+
+      await UserService.login(user)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((err) => {
+          this.$toaster('error', err.message)
+        })
+    },
+  },
+}
 </script>
