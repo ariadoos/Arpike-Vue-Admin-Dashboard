@@ -1,7 +1,9 @@
 import authClient from '@/services/instance/AuthService'
 
 export default {
-  login(user) {
+  async login(user) {
+    await this.csrfTokenRequest()
+
     return authClient.post('login', user)
   },
   csrfTokenRequest() {

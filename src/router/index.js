@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '@/views/Login.vue'
 import DashboardLayout from '@/components/layouts/DashboardLayout'
 import Dashboard from '@/views/admin/Dashboard'
+import NProgress from 'nprogress'
 
 Vue.use(VueRouter)
 
@@ -42,5 +43,12 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 })
+
+router.beforeEach((routeTo, routeForm, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach((routeTo, routeForm, next) => NProgress.done())
 
 export default router

@@ -51,17 +51,13 @@ export default {
         email: this.email,
         password: this.password,
       }
-
-      await UserService.csrfTokenRequest().catch((err) => {
-        this.$toaster('error', err.message)
-      })
-
-      await UserService.login(user)
+      UserService.login(user)
         .then((response) => {
           console.log(response)
         })
         .catch((err) => {
-          this.$toaster('error', err.message)
+          console.log(err)
+          this.$toaster('error', err.response.message)
         })
     },
   },

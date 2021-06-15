@@ -7,4 +7,6 @@ import '@fortawesome/fontawesome-free/js/all.js'
 import '../assets/css/main.css'
 import '../assets/css/responsive.css'
 
+import 'nprogress/nprogress.css'
+
 export default {}
