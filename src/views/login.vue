@@ -8,22 +8,20 @@
       <div class="card-body">
         <form @submit.prevent="login">
           <div class="form-group">
-            <input
+            <BaseInput
               type="email"
-              class="form-control"
-              id="email"
-              placeholder="Emaiil"
+              placeholder="Email"
               v-model="email"
-            />
+              className="form-control"
+            ></BaseInput>
           </div>
           <div class="form-group">
-            <input
+            <BaseInput
               type="password"
-              class="form-control"
-              id="password"
               placeholder="Password"
               v-model="password"
-            />
+              className="form-control"
+            ></BaseInput>
           </div>
 
           <button type="submit" class="btn btn-outline-primary">
@@ -53,11 +51,15 @@ export default {
       }
       UserService.login(user)
         .then((response) => {
-          console.log(response)
+          console.log(response.data)
+          if (response.status == 200) {
+            this.$router.push({ name: 'Dashboard' })
+            this.$toaster('success', response.data.message)
+          }
         })
         .catch((err) => {
-          console.log(err)
-          this.$toaster('error', err.response.message)
+          console.log(err.response)
+          // this.$toaster('error', err.response.message)
         })
     },
   },

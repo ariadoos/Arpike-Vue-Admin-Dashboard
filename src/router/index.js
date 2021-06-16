@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'login',
+    name: 'Login',
     component: Login,
   },
   {
@@ -22,7 +22,7 @@ const routes = [
     children: [
       {
         path: 'dashboard',
-        name: 'dashboard',
+        name: 'Dashboard',
         component: Dashboard,
       },
     ],
