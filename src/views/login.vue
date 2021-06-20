@@ -24,9 +24,9 @@
             ></BaseInput>
           </div>
 
-          <button type="submit" class="btn btn-outline-primary">
+          <BaseButton type="submit" buttonClass="btn-outline-primary">
             <i class="far fa-envelope"></i>Log in
-          </button>
+          </BaseButton>
         </form>
       </div>
     </div>
