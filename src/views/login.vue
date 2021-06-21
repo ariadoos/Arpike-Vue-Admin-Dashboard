@@ -6,28 +6,51 @@
       </div>
 
       <div class="card-body">
-        <form @submit.prevent="login">
-          <div class="form-group">
-            <BaseInput
-              type="email"
-              placeholder="Email"
-              v-model="email"
-              className="form-control"
-            ></BaseInput>
-          </div>
-          <div class="form-group">
-            <BaseInput
-              type="password"
-              placeholder="Password"
-              v-model="password"
-              className="form-control"
-            ></BaseInput>
-          </div>
+        <ValidationObserver ref="form" v-slot="{ handleSubmit }">
+          <form @submit.prevent="handleSubmit(login)">
+            <div class="form-group">
+              <ValidationProvider
+                name="E-mail"
+                rules="required|email"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <BaseInput
+                  type="email"
+                  placeholder="Email"
+                  v-model="email"
+                  :className="['form-control', errors[0] ? 'is-invalid' : '']"
+                  ><div class="invalid-feedback">
+                    {{ errors[0] }}
+                  </div></BaseInput
+                >
+              </ValidationProvider>
+            </div>
+            <ValidationProvider
+              vid="password"
+              name="Password"
+              rules="required"
+              v-slot="{ errors }"
+              :bails="false"
+            >
+              <div class="form-group">
+                <BaseInput
+                  type="password"
+                  placeholder="Password"
+                  v-model="password"
+                  :className="['form-control', errors[0] ? 'is-invalid' : '']"
+                  ><div class="invalid-feedback">
+                    {{ errors[0] }}
+                  </div></BaseInput
+                >
+              </div>
+            </ValidationProvider>
 
-          <BaseButton type="submit" buttonClass="btn-outline-primary">
-            <i class="far fa-envelope"></i>Log in
-          </BaseButton>
-        </form>
+            <BaseButton type="submit" buttonClass="btn-outline-primary">
+              <i class="far fa-envelope"></i>Log in
+            </BaseButton>
+          </form>
+        </ValidationObserver>
       </div>
     </div>
   </div>
@@ -58,7 +81,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response)
+          console.log(err)
           // this.$toaster('error', err.response.message)
         })
     },

@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div>
     <label v-if="label">{{ label }}</label>
     <input
       :value="value"
@@ -7,7 +7,8 @@
       v-bind="$attrs"
       :class="className"
     />
-  </span>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -22,7 +23,7 @@ export default {
       type: [Number, String],
     },
     className: {
-      type: [String],
+      type: [Array, String],
     },
   },
   methods: {
