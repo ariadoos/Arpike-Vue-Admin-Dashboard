@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import UserService from '@/services/user/UserService'
+import NProgress from 'nprogress'
 
 export default {
   data() {
@@ -67,21 +67,27 @@ export default {
     }
   },
   methods: {
-    async login() {
+    login() {
+      NProgress.start()
       let user = {
         email: this.email,
         password: this.password,
       }
-      UserService.login(user)
+      this.$store
+        .dispatch('user/login', user)
         .then((response) => {
-          console.log(response.data)
           if (response.status == 200) {
             this.$router.push({ name: 'Dashboard' })
             this.$toaster('success', response.data.message)
           }
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
+          if (err.response.status == 401) {
+            this.$toaster('error', err.response.data.message)
+          }
+          NProgress.done()
+
           // this.$toaster('error', err.response.message)
         })
     },

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import store from '@/store'
+
 import Login from '@/views/Login.vue'
 import DashboardLayout from '@/components/layouts/DashboardLayout'
 import Dashboard from '@/views/admin/Dashboard'
@@ -17,13 +19,14 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    redirect: { name: 'dashboard' },
+    redirect: { name: 'Dashboard' },
     component: DashboardLayout,
     children: [
       {
         path: 'dashboard',
         name: 'Dashboard',
         component: Dashboard,
+        meta: { requiresAuth: true },
       },
     ],
   },
@@ -46,7 +49,23 @@ const router = new VueRouter({
 
 router.beforeEach((routeTo, routeForm, next) => {
   NProgress.start()
-  next()
+  if (routeTo.matched.some((record) => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+
+    let isAuthenticated = localStorage.getItem('authenticated')
+
+    if (isAuthenticated) {
+      store.dispatch('user/getCurrentUser')
+      next()
+    } else {
+      next({
+        name: 'Login',
+      })
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
 })
 
 router.afterEach((routeTo, routeForm, next) => NProgress.done())

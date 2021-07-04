@@ -34,7 +34,7 @@
           <div class="dropdown-content">
             <a href="#">Profile</a>
             <a href="#">Settings</a>
-            <a href="#">Logout</a>
+            <a @click.prevent="logout">Logout</a>
           </div>
         </div>
         <!-- End User Avatar Wrapper -->
@@ -45,11 +45,18 @@
 </template>
 
 <script>
+import NProgress from 'nprogress'
+
 export default {
   methods: {
     toggleSideBar() {
       document.getElementById('sidebar').classList.toggle('active')
       document.getElementById('main-content').classList.toggle('active')
+    },
+    logout() {
+      this.$store.dispatch('user/logout').catch((err) => {
+        console.log(err)
+      })
     },
   },
 }
